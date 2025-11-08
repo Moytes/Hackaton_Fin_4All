@@ -1,0 +1,253 @@
+/* Estilo general del contenedor principal */
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #007F5F 0%, #2B9348 100%);
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.register-card {
+    max-width: 500px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b8c900 0%, #a0b000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.main-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 2rem;
+    font-size: 14px;
+}
+
+/* Estilos para el formulario */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Estilo para los labels */
+.register-form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-size: 14px;
+    display: block;
+}
+
+/* Contenedor para inputs con iconos */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    color: #9ca3af;
+    font-size: 16px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.input-icon.textarea-icon {
+    top: 14px;
+    align-self: flex-start;
+}
+
+/* Estilo para inputs, textareas y selects */
+.register-form input[type="text"],
+.register-form input[type="file"],
+.register-form textarea,
+.register-form select {
+    width: 100%;
+    padding: 12px 16px;
+    padding-left: 42px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+}
+
+.register-form input[type="text"]:focus,
+.register-form textarea:focus,
+.register-form select:focus {
+    outline: none;
+    border-color: #2ea079;
+    box-shadow: 0 0 0 3px rgba(46, 160, 121, 0.1);
+}
+
+.register-form input[type="text"]::placeholder,
+.register-form textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Espacio específico para el select múltiple */
+.register-form select[multiple] {
+    height: 120px;
+    padding: 8px;
+}
+
+.register-form select[multiple] option {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+/* Contenedor de la sección del formulario dinámico */
+.form-section {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-title {
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo para el checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+}
+
+.checkbox-icon {
+    color: #2ea079;
+    font-size: 18px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #2ea079;
+}
+
+.checkbox-container label {
+    font-weight: 400;
+    margin-bottom: 0;
+    color: #374151;
+    cursor: pointer;
+}
+
+/* Estilo para el botón de envío */
+.submit-button {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #2ea079 0%, #1a8b6c 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(46, 160, 121, 0.3);
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46, 160, 121, 0.4);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* Estilo para el enlace de inicio de sesión */
+.login-link-button {
+    background: none;
+    border: 2px solid #2ea079;
+    color: #2ea079;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.login-link-button:hover {
+    background-color: #f0fdf4;
+    transform: translateY(-2px);
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.back-link a {
+    color: #2ea079;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.back-link a:hover {
+    color: #1a8b6c;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .register-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .main-title {
+        font-size: 24px;
+    }
+}
