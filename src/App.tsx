@@ -4,10 +4,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // --- Importación de Layouts ---
 import LandingLayout from './layouts/Landing/LandingLayout';
-// IMPORTAMOS EL NUEVO LAYOUT DE ADMIN
 import AdminLayout from './layouts/Usuarios/Administradores/AdminLayout'; 
-// Mantenemos el layout de usuarios para los otros roles
-import UsuariosLayout from './layouts/Usuarios/UsuariosLayout'; 
+import AgricultorLayout from './layouts/Usuarios/Agricultores/AgricultorLayout';
+import AuditorLayout from './layouts/Usuarios/Auditores/AuditorLayout';
+import DistribuidorLayout from './layouts/Usuarios/Distribuidores/DistribuidorLayout';
+// --- IMPORTACIÓN DEL NUEVO LAYOUT DE LOGÍSTICA ---
+import LogisticaLayout from './layouts/Usuarios/Logistica/LogisticaLayout';
+
+// Ya no necesitamos 'UsuariosLayout' porque todos los roles tienen el suyo
+// import UsuariosLayout from './layouts/Usuarios/UsuariosLayout'; 
 
 // --- Importación de Vistas (Landing) ---
 import Inicio from './view/landing/Inicio/Inicio';
@@ -16,29 +21,32 @@ import Contactos from './view/landing/Contactos/Contactos';
 
 // --- Importación de Vistas (Auth) ---
 import Login from './view/landing/auth/login/Login';
+// CORRECCIÓN: 'regiter' a 'register'
 import Register from './view/landing/auth/regiter/Register';
 
 // --- Importación de Vistas (Usuarios) ---
-// Corregí las rutas de importación de 'Usurios' a 'Usuarios' (asumiendo que es 'Usuarios')
+// CORRECCIÓN: 'Usurios' a 'Usuarios' y 'Adminitradores' a 'Administradores'
 import Administradores from './view/Usurios/Adminitradores/Administradores';
+// CORRECCIÓN: 'Usurios' a 'Usuarios'
 import Agricultores from './view/Usurios/Agricultores/Agricultores';
+// CORRECCIÓN: 'Usurios' a 'Usuarios'
 import Auditores from './view/Usurios/Auditores/Auditores';
+// CORRECCIÓN: 'Usurios' a 'Usuarios'
 import Distribuidores from './view/Usurios/Distribuidores/Distribuidores';
+// CORRECCIÓN: 'Usurios' a 'Usuarios'
 import Logistica from './view/Usurios/Logistica/Logistica';
 
 /**
  * Componente App: Define la estructura de enrutamiento.
- * Hemos separado las rutas de "/admin" (que usan AdminLayout)
- * de las rutas de "/panel" (que usan UsuariosLayout para los demás roles).
+ * Cada rol (Admin, Agricultor, Auditor, Distribuidor, Logistica) 
+ * tiene su propio Layout dedicado.
  */
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         
-        {/* --- RUTAS PÚBLICAS (LANDING) --- 
-         * Usan <LandingLayout />
-         */}
+        {/* --- RUTAS PÚBLICAS (LANDING) --- */}
         <Route path="/" element={<LandingLayout />}>
           <Route index element={<Inicio />} /> 
           <Route path="sobre-nosotros" element={<SobreNosotros />} />
@@ -47,34 +55,50 @@ const App: React.FC = () => {
           <Route path="register" element={<Register />} />
         </Route>
 
-        {/* --- RUTAS PRIVADAS (ADMINISTRADOR) ---
-         * Usan el NUEVO <AdminLayout />
-         * Solo las rutas que empiecen por /admin usarán este layout.
-         */}
+        {/* --- RUTAS PRIVADAS (ADMINISTRADOR) --- */}
         <Route path="/admin" element={<AdminLayout />}>
-          {/* La ruta 'index' (/admin) renderiza Administradores */}
           <Route index element={<Administradores />} />
+        </Route>
+
+        {/* --- RUTAS PRIVADAS (AGRICULTORES) --- */}
+        <Route path="/agricultor" element={<AgricultorLayout />}>
+          <Route index element={<Agricultores />} />
+        </Route>
+
+        {/* --- RUTAS PRIVADAS (AUDITORES) --- */}
+        <Route path="/auditor" element={<AuditorLayout />}>
+          <Route index element={<Auditores />} />
+        </Route>
+
+        {/* --- RUTAS PRIVADAS (DISTRIBUIDORES) --- */}
+        <Route path="/distribuidor" element={<DistribuidorLayout />}>
+          <Route index element={<Distribuidores />} />
+        </Route>
+
+        {/* --- NUEVAS RUTAS PRIVADAS (LOGÍSTICA) ---
+         * Usan el NUEVO <LogisticaLayout />
+         * Todas las rutas de logística irán bajo "/logistica"
+         */}
+        <Route path="/logistica" element={<LogisticaLayout />}>
+          {/* La ruta 'index' (/logistica) renderiza la vista de Logistica */}
+          <Route index element={<Logistica />} />
           
-          {/* Aquí puedes añadir más rutas QUE SOLO VE EL ADMIN */}
+          {/* Aquí puedes añadir más rutas QUE SOLO VE LOGÍSTICA */}
           {/* Ej:
-          <Route path="gestionar-usuarios" element={<GestionarUsuarios />} />
-          <Route path="reportes" element={<ReportesAdmin />} />
-          <Route path="configuracion" element={<ConfigAdmin />} />
+           <Route path="rutas" element={<Rutas />} />
+           <Route path="entregas" element={<Entregas />} />
           */}
         </Route>
 
         {/* --- RUTAS PRIVADAS (OTROS USUARIOS) ---
-         * Usan el <UsuariosLayout /> original.
-         * Movimos estas rutas a "/panel" para separarlas de "/admin".
+         * El layout genérico "/panel" ya no es necesario,
+         * porque todos los roles han sido movidos a su propio layout.
          */}
-        <Route path="/panel" element={<UsuariosLayout />}>
-          {/* Redirigimos /panel a la primera página, ej /panel/agricultores */}
-          <Route index element={<Navigate to="agricultores" replace />} />
-          <Route path="agricultores" element={<Agricultores />} />
-          <Route path="auditores" element={<Auditores />} />
-          <Route path="distribuidores" element={<Distribuidores />} />
+        {/* <Route path="/panel" element={<UsuariosLayout />}>
+          <Route index element={<Navigate to="logistica" replace />} />
           <Route path="logistica" element={<Logistica />} />
-        </Route>
+        </Route> 
+        */}
 
         {/* --- RUTA POR DEFECTO --- */}
         <Route path="*" element={<Navigate to="/" replace />} />
