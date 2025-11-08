@@ -35,8 +35,8 @@ const App: React.FC = () => {
     <BrowserRouter>
       {/* Routes define el área donde las rutas se renderizarán */}
       <Routes>
-        
-        {/* --- RUTAS PÚBLICAS (LANDING) --- 
+
+        {/* --- RUTAS PÚBLICAS (LANDING) ---
          * Todas las rutas anidadas aquí usarán <LandingLayout />
          * El <LandingLayout> contendrá el Header y Footer.
          * El componente de la ruta (Ej: <Inicio />) se renderizará
@@ -44,8 +44,8 @@ const App: React.FC = () => {
         */}
         <Route path="/" element={<LandingLayout />}>
           {/* La ruta 'index' (/) renderiza Inicio */}
-          <Route index element={<Inicio />} /> 
-          
+          <Route index element={<Inicio />} />
+
           {/* Rutas hijas de Landing */}
           <Route path="sobre-nosotros" element={<SobreNosotros />} />
           <Route path="contactos" element={<Contactos />} />
