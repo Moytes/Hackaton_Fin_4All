@@ -16,7 +16,7 @@ const Inicio: React.FC = () => {
   return (
     <Card>
       <Title level={2}>Inicio</Title>
-      <Text type="secondary">Bienvenido a la página principal de la aplicación.</Text>
+      <Text type="secondary">Bienvenido a la página principal de la aplicación. hola</Text>
       <Space wrap className="mt-6">
         {/* Usa componentes de Ant Design */}
         <Button onClick={() => navigate('/sobre-nosotros')}>
