@@ -1,6 +1,11 @@
 import React from 'react';
-// Importa los componentes de react-router-dom
+// Importa los componentes de react-router-dom, incluyendo <Outlet />
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// --- Importación de Layouts ---
+// Estos componentes envolverán tus páginas
+import LandingLayout from './layouts/Landing/LandingLayout';
+import UsuariosLayout from './layouts/Usuarios/UsuariosLayout';
 
 // --- Importación de Vistas (Landing) ---
 import Inicio from './view/landing/Inicio/Inicio';
@@ -12,7 +17,7 @@ import Login from './view/landing/auth/login/Login';
 import Register from './view/landing/auth/regiter/Register';
 
 // --- Importación de Vistas (Usuarios) ---
-// Asumiendo que 'Usurios' era 'Usuarios' y 'Adminitradores' era 'Administradores'
+// Corregí los nombres de 'Usurios' a 'Usuarios' y 'Adminitradores' a 'Administradores' en la importación
 import Administradores from './view/Usurios/Adminitradores/Administradores';
 import Agricultores from './view/Usurios/Agricultores/Agricultores';
 import Auditores from './view/Usurios/Auditores/Auditores';
@@ -21,44 +26,55 @@ import Logistica from './view/Usurios/Logistica/Logistica';
 
 /**
  * Componente App: El corazón de la aplicación.
- * Contiene el enrutador principal (BrowserRouter) y define todas las rutas.
+ * Define la estructura de enrutamiento principal usando Layouts.
+ * Ya no contiene HTML de presentación, solo la lógica de rutas.
  */
 const App: React.FC = () => {
   return (
     // BrowserRouter envuelve toda la aplicación para habilitar el enrutamiento
     <BrowserRouter>
-      {/* Fondo gris claro para toda la app */}
-      <div className="bg-gray-100 min-h-screen p-4 md:p-8 font-sans">
+      {/* Routes define el área donde las rutas se renderizarán */}
+      <Routes>
         
-        {/* Cabecera simple (opcional, podría estar en un Layout) */}
-        <nav className="bg-white p-4 rounded-xl shadow-md mb-8 max-w-4xl mx-auto border border-gray-200">
-          <h1 className="text-2xl font-bold text-center text-blue-700">Mi Aplicación React (Rutas Reales)</h1>
-        </nav>
+        {/* --- RUTAS PÚBLICAS (LANDING) --- 
+         * Todas las rutas anidadas aquí usarán <LandingLayout />
+         * El <LandingLayout> contendrá el Header y Footer.
+         * El componente de la ruta (Ej: <Inicio />) se renderizará
+         * donde pongas <Outlet /> en tu LandingLayout.
+        */}
+        <Route path="/" element={<LandingLayout />}>
+          {/* La ruta 'index' (/) renderiza Inicio */}
+          <Route index element={<Inicio />} /> 
+          
+          {/* Rutas hijas de Landing */}
+          <Route path="sobre-nosotros" element={<SobreNosotros />} />
+          <Route path="contactos" element={<Contactos />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
 
-        {/* El componente <Routes> define dónde se renderizarán las rutas */}
-        <main>
-          <Routes>
-            {/* Rutas de Landing */}
-            <Route path="/" element={<Inicio />} />
-            <Route path="/sobre-nosotros" element={<SobreNosotros />} />
-            <Route path="/contactos" element={<Contactos />} />
+        {/* --- RUTAS PRIVADAS (PANEL DE USUARIOS) ---
+         * Todas las rutas anidadas aquí usarán <UsuariosLayout />
+         * Este layout tendrá su propio menú (ej. una barra lateral).
+         * Todas las rutas aquí dentro estarán prefijadas por "/admin"
+        */}
+        <Route path="/admin" element={<UsuariosLayout />}>
+          {/* La ruta 'index' (/admin) renderiza Administradores */}
+          <Route index element={<Administradores />} />
 
-            {/* Rutas de Autenticación */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+          {/* Rutas hijas de Usuarios (ej. /admin/agricultores) */}
+          <Route path="agricultores" element={<Agricultores />} />
+          <Route path="auditores" element={<Auditores />} />
+          <Route path="distribuidores" element={<Distribuidores />} />
+          <Route path="logistica" element={<Logistica />} />
+        </Route>
 
-            {/* Rutas de Paneles de Usuario (Rutas Protegidas en un futuro) */}
-            <Route path="/admin" element={<Administradores />} />
-            <Route path="/admin/agricultores" element={<Agricultores />} />
-            <Route path="/admin/auditores" element={<Auditores />} />
-            <Route path="/admin/distribuidores" element={<Distribuidores />} />
-            <Route path="/admin/logistica" element={<Logistica />} />
+        {/* --- RUTA POR DEFECTO ---
+         * Si no se encuentra ninguna ruta, redirige a la raíz (/).
+        */}
+        <Route path="*" element={<Navigate to="/" replace />} />
 
-            {/* Ruta por defecto (si no se encuentra, redirige a inicio) */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-      </div>
+      </Routes>
     </BrowserRouter>
   );
 };
