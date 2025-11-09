@@ -1,0 +1,61 @@
+.logistica-layout {
+  min-height: 100vh;
+}
+
+.layout-sider {
+  /* Controla el scroll interno y mantiene el layout fijo */
+  overflow: auto;
+  height: 100vh;
+  position: sticky; /* Cambiado de 'fixed' a 'sticky' para mejor compatibilidad */
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.layout-sider-logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.layout-sider-logout {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  padding: 0 24px;
+  /* Transición para que el botón se oculte suavemente */
+  transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Oculta el padding cuando el menú está colapsado */
+.ant-layout-sider-collapsed .layout-sider-logout {
+  padding: 0 8px;
+}
+
+.layout-header {
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.layout-content {
+  margin: 24px 16px;
+  padding: 24px;
+  min-height: 280px;
+  overflow: auto; /* Permite scroll si el contenido es largo */
+}
+
+.menu-trigger-mobile {
+  font-size: 18px !important;
+  width: 48px;
+  height: 48px;
+}

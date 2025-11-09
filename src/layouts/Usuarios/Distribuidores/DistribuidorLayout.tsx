@@ -1,170 +1,166 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Layout, Button, Typography, theme } from 'antd';
 import {
-  Layout,
-  Menu,
-  Button,
-  theme,
-  Avatar,
-  Typography,
-  Space,
-} from 'antd';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   DashboardOutlined,
-  TeamOutlined,
   LogoutOutlined,
+  TeamOutlined,
   ShopOutlined,
   ContainerOutlined,
+  MenuOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
+import { useAuth } from '../../../context/AuthContext';
+import './DistribuidorLayout.css';
 
-const { Header, Sider, Content, Footer } = Layout;
-const { Title, Text } = Typography;
+const { Header, Content } = Layout;
+const { Title } = Typography;
 
-/**
- * Layout: layouts/Usuarios/Distribuidores/DistribuidorLayout.tsx
- * Este es el layout principal para los usuarios del rol Distribuidor.
- * Proporciona un menú lateral (Sider) y un área de contenido (Content)
- * donde se renderizarán las vistas secundarias (usando <Outlet />).
- */
 const DistribuidorLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  // Función para manejar clics en el menú y navegar
-  // Tambien maneja la lógica de cerrar sesión
-  const handleMenuClick = ({ key }: { key: string }) => {
-    if (key === 'logout') {
-      // Aquí iría tu lógica para limpiar tokens/estado de autenticación
-      console.log('Cerrando sesión...');
-      navigate('/login');
-    } else {
-      // Navega a la ruta correspondiente
-      navigate(key);
-    }
+  const handleLogout = () => {
+    logout();
   };
 
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  // Enlaces de navegación para el distribuidor
+  const navLinks = [
+    { text: 'Panel Distribución', href: '/distribuidor', icon: <DashboardOutlined /> },
+    { text: 'Gestión de Pedidos', href: '/distribuidor/pedidos', icon: <ContainerOutlined /> },
+    { text: 'Inventario y Stock', href: '/distribuidor/inventario', icon: <TeamOutlined /> },
+  ];
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        width={250}
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          bottom: 0,
-          background: colorBgContainer,
-          borderRight: '1px solid #f0f0f0',
-        }}
-      >
-        {/* Logo o Título del Sider */}
-        <div
-          style={{
-            height: 64,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '16px',
-            borderBottom: '1px solid #f0f0f0',
-          }}
+    <div className="layout-puma distribuidor-layout">
+      {/* HEADER IDÉNTICO AL LANDING */}
+      <header className="header-aguila">
+        <nav className="nav-condor">
+          <Link to="/distribuidor" className="logo-jaguar">
+            Panel Distribuidor
+          </Link>
+          
+          <div className="nav-escritorio-gacela">
+            {navLinks.map((link) => (
+              <Link
+                key={link.text}
+                to={link.href}
+                className="nav-enlace-colibri"
+              >
+                {link.icon}
+                <span>{link.text}</span>
+              </Link>
+            ))}
+            
+            {/* Botón Cerrar Sesión en desktop */}
+            <Button
+              type="primary"
+              danger
+              icon={<LogoutOutlined />}
+              onClick={handleLogout}
+              className="nav-enlace-colibri logout-btn"
+            >
+              Cerrar Sesión
+            </Button>
+          </div>
+
+          {/* Botón menú móvil */}
+          <div className="nav-boton-movil-contenedor">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="nav-boton-movil-halcon"
+              aria-controls="mobile-menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span className="sr-only">Abrir menú principal</span>
+              {isMobileMenuOpen ? <CloseOutlined className="h-6 w-6" /> : <MenuOutlined className="h-6 w-6" />}
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* MENÚ MÓVIL OVERLAY */}
+      {isMobileMenuOpen && (
+        <div 
+          className="menu-movil-overlay-buho" 
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
         >
-          <Space>
-            <Avatar
-              shape="square"
-              size="large"
-              icon={<ShopOutlined />}
-              style={{ backgroundColor: '#1890ff' }}
-            />
-            {!collapsed && (
-              <Title level={4} style={{ margin: 0, whiteSpace: 'nowrap' }}>
-                Distribuidor
-              </Title>
-            )}
-          </Space>
+          <div className="menu-movil-contenido-loro">
+            <div className="menu-movil-header-tucan">
+              <Link to="/distribuidor" className="logo-jaguar" onClick={closeMobileMenu}>
+                Panel Distribuidor
+              </Link>
+              <button
+                onClick={closeMobileMenu}
+                className="nav-boton-movil-halcon"
+              >
+                <span className="sr-only">Cerrar menú</span>
+                <CloseOutlined className="h-6 w-6" />
+              </button>
+            </div>
+
+            <nav className="menu-movil-nav-pelicano">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.text}
+                  to={link.href}
+                  onClick={closeMobileMenu}
+                  className="menu-movil-enlace-quetzal"
+                >
+                  {link.icon}
+                  {link.text}
+                </Link>
+              ))}
+              
+              {/* Botón Cerrar Sesión en móvil */}
+              <Button
+                type="primary"
+                danger
+                icon={<LogoutOutlined />}
+                onClick={() => {
+                  closeMobileMenu();
+                  handleLogout();
+                }}
+                className="menu-movil-enlace-quetzal logout-btn-mobile"
+              >
+                Cerrar Sesión
+              </Button>
+            </nav>
+          </div>
         </div>
+      )}
 
-        {/* Menú de Navegación */}
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={['/distribuidor']}
-          onClick={handleMenuClick}
-          style={{ borderRight: 0, paddingTop: '16px' }}
-          items={[
-            {
-              key: '/distribuidor',
-              icon: <DashboardOutlined />,
-              label: 'Panel Distribución',
-            },
-            {
-              key: '/distribuidor/pedidos',
-              icon: <ContainerOutlined />,
-              label: 'Gestión de Pedidos',
-            },
-            {
-              key: '/distribuidor/inventario',
-              icon: <TeamOutlined />,
-              label: 'Inventario y Stock',
-            },
-            {
-              type: 'divider',
-            },
-            {
-              key: 'logout',
-              icon: <LogoutOutlined />,
-              label: 'Cerrar Sesión',
-              danger: true,
-            },
-          ]}
-        />
-      </Sider>
-
-      {/* Contenido Principal */}
-      <Layout style={{ marginLeft: collapsed ? 80 : 250, transition: 'all 0.2s' }}>
-        <Header style={{ padding: '0 24px', background: colorBgContainer, display: 'flex', alignItems: 'center', borderBottom: '1px solid #f0f0f0' }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
-          <Text style={{ fontSize: '16px', marginLeft: '16px' }}>
-            Portal de Distribuidores
-          </Text>
-        </Header>
-
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          {/* Aquí se renderizarán las vistas (Agricultores, MisCultivos, etc.) */}
+      {/* CONTENIDO PRINCIPAL */}
+      <main className="main-contenido-oso">
+        <div className="main-contenido-interno-tapir">
           <Outlet />
-        </Content>
+        </div>
+      </main>
 
-        <Footer style={{ textAlign: 'center' }}>
-          Plataforma de Trazabilidad ©{new Date().getFullYear()}
-        </Footer>
-      </Layout>
-    </Layout>
+      {/* FOOTER */}
+      <footer className="footer-ballena">
+        <div className="footer-contenido-delfin">
+          <div className="footer-copyright-tortuga">
+            <p>&copy; {new Date().getFullYear()} Plataforma de Distribución. Todos los derechos reservados.</p>
+          </div>
+
+          <div className="footer-links-lobo">
+            <Link to="/distribuidor" className="footer-link-koala">Panel Distribución</Link>
+            <Link to="/distribuidor/pedidos" className="footer-link-koala">Gestión de Pedidos</Link>
+            <Link to="/distribuidor/inventario" className="footer-link-koala">Inventario</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 

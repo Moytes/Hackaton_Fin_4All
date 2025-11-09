@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { Layout, Menu, Button, Typography, theme } from 'antd';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Layout, Menu, Button, Typography, Grid, theme } from 'antd';
 import {
   TruckOutlined, // Ícono principal para Logística
   LogoutOutlined,
   EnvironmentOutlined, // Ícono para "Rutas"
   CarryOutOutlined, // Ícono para "Entregas"
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
+  MenuOutlined, // Ícono para el menú móvil
 } from '@ant-design/icons';
+// 1. Importa el hook 'useAuth' para cerrar sesión
+import { useAuth } from '../../../context/AuthContext';
+// 2. Importa el archivo CSS
+import './LogisticaLayout.css';
 
 const { Header, Sider, Content } = Layout;
-const { Title } = Typography;
+const { useBreakpoint } = Grid;
 
-/**
- * Layout: layouts/Usuarios/Logistica/LogisticaLayout.tsx
- * * Este es el layout principal para la sección de Logística.
- * Incluye el menú lateral (Sider) y el área de contenido (Content)
- * donde se renderizarán las vistas anidadas (usando <Outlet />).
- */
 const LogisticaLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
+  const screens = useBreakpoint(); // Hook para detectar el tamaño de pantalla
+  
+  // 3. Obtén la función 'logout' del contexto
+  const { logout } = useAuth();
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  // Función para manejar el cierre de sesión
+  // 4. Corrige la función 'handleLogout'
   const handleLogout = () => {
-    // Aquí iría tu lógica de limpieza de tokens o estado de autenticación
-    console.log('Cerrando sesión...');
-    navigate('/login');
+    logout();
+    // No necesitas 'navigate'. El ProtectedRoute se encargará
+    // de redirigir a /login automáticamente.
   };
 
   // Definición de los ítems del menú específicos para Logística
@@ -54,35 +54,34 @@ const LogisticaLayout: React.FC = () => {
   ];
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout className="logistica-layout">
       {/* --- MENÚ LATERAL (SIDER) --- */}
-      <Sider 
-        trigger={null} 
-        collapsible 
+      <Sider
+        // Se colapsa automáticamente en pantallas menores a 'lg' (992px)
+        breakpoint="lg"
+        // En pantallas 'xs' (móvil), se oculta por completo (width 0)
+        collapsedWidth={screens.xs ? 0 : 80}
+        // No mostramos el trigger nativo en móvil
+        trigger={screens.xs ? null : undefined}
+        collapsible
         collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
         theme="dark"
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
+        className="layout-sider"
       >
-        <div style={{ height: '32px', margin: '16px', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '6px', textAlign: 'center', color: 'white' }}>
+        <div className="layout-sider-logo">
           {collapsed ? 'L' : 'Logística'}
         </div>
         
-        <Menu 
-          theme="dark" 
-          mode="inline" 
-          defaultSelectedKeys={['1']} 
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={['1']}
           items={menuItems}
         />
         
         {/* Botón de Logout en el Sider */}
-        <div style={{ position: 'absolute', bottom: '20px', width: '100%', padding: '0 24px' }}>
+        <div className="layout-sider-logout">
           <Button
             type="primary"
             danger
@@ -96,31 +95,30 @@ const LogisticaLayout: React.FC = () => {
       </Sider>
 
       {/* --- ÁREA PRINCIPAL (DERECHA) --- */}
-      <Layout style={{ marginLeft: collapsed ? 80 : 200, transition: 'margin-left 0.2s' }}>
+      <Layout>
         
         {/* Header */}
-        <Header style={{ padding: '0 16px', background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
+        <Header className="layout-header" style={{ background: colorBgContainer }}>
+          {/* Solo muestra el botón de menú en pantallas móviles/tablets */}
+          {!screens.lg && (
+            <Button
+              type="text"
+              icon={<MenuOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              className="menu-trigger-mobile"
+            />
+          )}
+          <Typography.Title level={4} style={{ margin: 0, marginLeft: screens.lg ? 0 : 16 }}>
+            Panel de Logística
+          </Typography.Title>
         </Header>
         
         {/* Contenido de la página */}
         <Content
+          className="layout-content"
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
-            overflow: 'auto', // Permite scroll si el contenido es largo
           }}
         >
           {/* Aquí es donde React Router renderizará la vista (ej: Logistica.tsx) */}
