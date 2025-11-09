@@ -1,0 +1,367 @@
+/* MisVentas.css */
+.ventas-container {
+  min-height: 100vh;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Fondo animado */
+.ventas-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: #ffffff;
+}
+
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  top: -200px;
+  right: -150px;
+  animation: float-shape 20s infinite ease-in-out;
+}
+
+.shape-2 {
+  width: 350px;
+  height: 350px;
+  bottom: -100px;
+  left: -100px;
+  animation: float-shape 15s infinite ease-in-out 5s;
+}
+
+@keyframes float-shape {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Contenido principal */
+.ventas-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.ventas-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo y títulos */
+.logo-container { 
+  text-align: center; 
+  margin-bottom: 24px; 
+}
+
+.logo { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 12px; 
+  background: linear-gradient(135deg, #f0f4ff, #e6f7ff); 
+  padding: 12px 24px; 
+  border-radius: 16px; 
+}
+
+.logo-icon { 
+  font-size: 1.8rem; 
+}
+
+.logo-text { 
+  font-size: 1.5rem; 
+  font-weight: 800; 
+  background: linear-gradient(135deg, #667eea, #764ba2); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  background-clip: text; 
+}
+
+.main-title { 
+  font-size: 2rem; 
+  font-weight: 800; 
+  color: #1a1a1a; 
+  text-align: center; 
+  margin-bottom: 8px; 
+}
+
+.subtitle { 
+  font-size: 1rem; 
+  color: #666666; 
+  text-align: center; 
+  margin-bottom: 32px; 
+}
+
+/* Botones y estadísticas */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.back-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+  color: white;
+}
+
+.stats-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Secciones */
+.ventas-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Grid de compras */
+.compras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjetas de compra */
+.compra-card {
+  border-radius: 16px !important;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.compra-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-card {
+  border-color: #ffa940;
+  background: linear-gradient(135deg, #fff7e6, #fff2cc);
+}
+
+.completed-card {
+  border-color: #52c41a;
+  background: linear-gradient(135deg, #f6ffed, #e6f7ff);
+}
+
+/* Header de compra */
+.compra-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.compra-info h3 {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 1.1rem;
+}
+
+.compra-distribuidor {
+  color: #666;
+  font-size: 0.9rem;
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Detalles de compra */
+.compra-details {
+  margin-bottom: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.detail-row span {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.logistica-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1890ff;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 8px;
+  background: #f0f8ff;
+  border-radius: 6px;
+}
+
+/* Timeline */
+.compra-timeline {
+  margin: 1rem 0;
+}
+
+.compra-timeline .ant-timeline-item {
+  padding-bottom: 8px;
+}
+
+.compra-timeline .ant-timeline-item-content {
+  font-size: 0.85rem;
+}
+
+/* Acciones */
+.compra-actions {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.confirm-button {
+  background: #52c41a;
+  border-color: #52c41a;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.confirm-button:hover {
+  background: #73d13d;
+  border-color: #73d13d;
+}
+
+/* Estados vacíos */
+.ventas-loading {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.empty-state p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ventas-card {
+    padding: 32px 24px;
+  }
+  
+  .main-title {
+    font-size: 1.75rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .stats-container {
+    justify-content: center;
+  }
+  
+  .compras-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .compra-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .ventas-content {
+    padding: 0 16px;
+  }
+  
+  .ventas-card {
+    padding: 24px 20px;
+  }
+  
+  .main-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .logo {
+    padding: 8px 16px;
+  }
+  
+  .logo-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* Animaciones adicionales */
+.highlight-card {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 169, 64, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 169, 64, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 169, 64, 0); }
+}

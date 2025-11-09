@@ -1,0 +1,277 @@
+/* Login.css */
+
+/* Contenedor principal - Adaptado para layout, con altura calculada para evitar overflows */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #007f5f 0%, #2b9348 50%, #55a630 100%);
+  padding: 40px 20px;
+  min-height: calc(100vh - 160px); /* Ajusta según altura de header/footer (~80px cada uno) */
+}
+
+/* Tarjeta de login - Más formal con sombras suaves */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.login-card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+
+.login-card .ant-card-body {
+  padding: 40px 32px;
+}
+
+/* Logo - Cambiado a texto formal */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.logo-text {
+  color: #2b9348 !important;
+  font-weight: 700 !important;
+  margin-bottom: 0 !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Títulos */
+.login-title {
+  text-align: center;
+  margin-bottom: 8px !important;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.login-subtitle {
+  display: block;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Formulario */
+.login-form {
+  margin-top: 24px;
+}
+
+.login-form .ant-form-item {
+  margin-bottom: 20px;
+}
+
+.login-form .ant-form-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Remember y Forgot - Nueva sección formal */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px !important;
+}
+
+.forgot-link {
+  color: #2b9348 !important;
+  padding: 0 !important;
+}
+
+.forgot-link:hover {
+  color: #55a630 !important;
+}
+
+/* Inputs personalizados - Más formales con bordes suaves */
+.custom-input {
+  height: 48px;
+  border-radius: 8px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  transition: all 0.3s ease;
+  padding: 8px 11px;
+}
+
+.custom-input:hover {
+  border-color: #80b918;
+}
+
+.custom-input:focus,
+.custom-input-focused {
+  border-color: #55a630;
+  box-shadow: 0 0 0 2px rgba(85, 166, 48, 0.1);
+}
+
+.input-prefix-icon {
+  color: #2b9348;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+/* Botón principal - Full width, gradiente verde */
+.btn-login {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2b9348 0%, #55a630 50%, #80b918 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(43, 147, 72, 0.3);
+  background: linear-gradient(135deg, #007f5f 0%, #2b9348 50%, #55a630 100%);
+}
+
+.btn-login:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Botón registro - Full width, borde verde */
+.btn-register {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 2px solid #55a630;
+  color: #2b9348;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+  background: #55a630;
+  color: white;
+  border-color: #55a630;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(85, 166, 48, 0.25);
+}
+
+.btn-register:active {
+  transform: translateY(0);
+}
+
+/* Botón volver */
+.btn-back {
+  color: #2b9348;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 0;
+  margin-top: 16px;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-back:hover {
+  color: #55a630;
+}
+
+/* Responsive - Optimizado para todos dispositivos */
+@media (max-width: 1024px) {
+  .login-card {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 30px 15px;
+    min-height: calc(100vh - 140px);
+  }
+  .login-card .ant-card-body {
+    padding: 32px 24px;
+  }
+  .logo-text {
+    font-size: 28px !important;
+  }
+  .login-title {
+    font-size: 24px !important;
+  }
+  .custom-input, .btn-login, .btn-register {
+    height: 46px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px 10px;
+    min-height: calc(100vh - 120px);
+  }
+  .login-card {
+    border-radius: 10px;
+  }
+  .login-card .ant-card-body {
+    padding: 24px 16px;
+  }
+  .logo-text {
+    font-size: 24px !important;
+  }
+  .login-title {
+    font-size: 22px !important;
+  }
+  .login-subtitle {
+    font-size: 13px;
+  }
+  .custom-input, .btn-login, .btn-register {
+    height: 44px;
+    font-size: 14px;
+  }
+  .remember-forgot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .forgot-link {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 375px) {
+  .login-card .ant-card-body {
+    padding: 20px 12px;
+  }
+  .custom-input, .btn-login, .btn-register {
+    height: 42px;
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .login-container {
+    padding: 20px;
+    align-items: flex-start;
+    min-height: auto;
+  }
+  .login-card .ant-card-body {
+    padding: 20px 24px;
+  }
+  .custom-input, .btn-login, .btn-register {
+    height: 40px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .login-card {
+    max-width: 460px;
+  }
+  .login-card .ant-card-body {
+    padding: 44px 36px;
+  }
+  .custom-input, .btn-login, .btn-register {
+    height: 50px;
+    font-size: 16px;
+  }
+}

@@ -9,6 +9,7 @@ import {
   ContainerOutlined,
   MenuOutlined,
   CloseOutlined,
+  SafetyCertificateOutlined, // <-- ICONO AÑADIDO
 } from '@ant-design/icons';
 import { useAuth } from '../../../context/AuthContext';
 import './DistribuidorLayout.css';
@@ -36,6 +37,7 @@ const DistribuidorLayout: React.FC = () => {
     { text: 'Panel Distribución', href: '/distribuidor', icon: <DashboardOutlined /> },
     { text: 'Gestión de Pedidos', href: '/distribuidor/pedidos', icon: <ContainerOutlined /> },
     { text: 'Inventario y Stock', href: '/distribuidor/inventario', icon: <TeamOutlined /> },
+    { text: 'Validación', href: '/distribuidor/validacion', icon: <SafetyCertificateOutlined /> }, // <-- ENLACE AÑADIDO
   ];
 
   return (
@@ -154,9 +156,11 @@ const DistribuidorLayout: React.FC = () => {
           </div>
 
           <div className="footer-links-lobo">
+            {/* Actualizamos también los links del footer */}
             <Link to="/distribuidor" className="footer-link-koala">Panel Distribución</Link>
             <Link to="/distribuidor/pedidos" className="footer-link-koala">Gestión de Pedidos</Link>
             <Link to="/distribuidor/inventario" className="footer-link-koala">Inventario</Link>
+            <Link to="/distribuidor/validacion" className="footer-link-koala">Validación</Link>
           </div>
         </div>
       </footer>

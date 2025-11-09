@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Typography, Space, Input, Form, Alert, Spin } from 'antd';
+import { Button, Card, Typography, Space, Input, Form, Alert, Spin, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useAuth } from '../../../../context/AuthContext';
 import { UserRole, ROLES } from '../../../../types/user.types';
 import axios from 'axios';
+import './Login.css'; // Asegúrate de que el CSS esté en el mismo directorio
 
 const { Title, Text } = Typography;
 
@@ -85,74 +87,91 @@ const Login: React.FC = () => {
     }
   };
 
-  if (isAuthLoading) {
-    return <Spin size="large" style={{ display: 'block', margin: '100px auto' }} />;
-  }
-
-  if (isAuthenticated) {
+  if (isAuthLoading || isAuthenticated) {
     return <Spin size="large" style={{ display: 'block', margin: '100px auto' }} />;
   }
 
   return (
-    <Card style={{ maxWidth: 400, margin: 'auto' }}>
-      <Title level={2}>Login</Title>
-      <Text type="secondary">Ingrese sus credenciales para continuar.</Text>
+    <div className="login-container">
+      <Card className="login-card">
+        <div className="logo-container">
+          <Title level={2} className="logo-text">AGRO</Title>
+        </div>
 
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleLogin}
-        className="mt-6"
-      >
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={[
-            { required: true, message: 'Por favor ingrese su email' },
-            { type: 'email', message: 'Ingrese un email válido' },
-          ]}
+        <Title level={3} className="login-title">Iniciar Sesión</Title>
+        <Text type="secondary" className="login-subtitle">
+          Ingresa tus credenciales para acceder al sistema.
+        </Text>
+
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleLogin}
+          className="login-form"
         >
-          <Input placeholder="Email" />
-        </Form.Item>
-
-        <Form.Item
-          name="contra"
-          label="Contraseña"
-          rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
-        >
-          <Input.Password placeholder="Contraseña" />
-        </Form.Item>
-
-        {error && (
-          <Form.Item>
-            <Alert message={error} type="error" showIcon />
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: 'Por favor ingresa tu email' },
+              { type: 'email', message: 'Ingresa un email válido' },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="input-prefix-icon" />}
+              placeholder="Email"
+              className="custom-input"
+            />
           </Form.Item>
-        )}
 
-        <Form.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={isLoading}
-              style={{ width: '100%' }}
-            >
-              Entrar
-            </Button>
-            <Button
-              onClick={() => navigate('/register')}
-              style={{ width: '100%' }}
-            >
-              ¿No tienes cuenta? Regístrate
-            </Button>
-          </Space>
-        </Form.Item>
-      </Form>
+          <Form.Item
+            name="contra"
+            rules={[{ required: true, message: 'Por favor ingresa tu contraseña' }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined className="input-prefix-icon" />}
+              placeholder="Contraseña"
+              className="custom-input"
+            />
+          </Form.Item>
 
-      <Button type="link" onClick={() => navigate('/')} className="mt-4 px-0">
-        Volver a Inicio
-      </Button>
-    </Card>
+          <Form.Item className="remember-forgot">
+            <Checkbox>Recordarme</Checkbox>
+            <Button type="link" className="forgot-link" onClick={() => navigate('/forgot-password')}>
+              ¿Olvidaste tu contraseña?
+            </Button>
+          </Form.Item>
+
+          {error && (
+            <Form.Item>
+              <Alert message={error} type="error" showIcon />
+            </Form.Item>
+          )}
+
+          <Form.Item>
+            <Space direction="vertical" style={{ width: '100%' }} size={12}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={isLoading}
+                className="btn-login"
+              >
+                Entrar
+              </Button>
+              <Button
+                onClick={() => navigate('/register')}
+                className="btn-register"
+              >
+                ¿No tienes cuenta? Regístrate
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+
+        <Button type="link" onClick={() => navigate('/')} className="btn-back">
+          ← Volver al Inicio
+        </Button>
+      </Card>
+    </div>
   );
 };
 

@@ -1,0 +1,225 @@
+.admin-panel-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #007f5f, #55a630, #80b918);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animación de fondo */
+.bg-animation .circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float 10s infinite ease-in-out;
+}
+
+.circle-1 {
+  width: 200px;
+  height: 200px;
+  background: #d9ed92;
+  top: 10%;
+  left: 15%;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  background: #99d98c;
+  bottom: 15%;
+  right: 10%;
+}
+
+.circle-3 {
+  width: 150px;
+  height: 150px;
+  background: #52b69a;
+  bottom: 40%;
+  left: 40%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Tarjeta principal */
+.admin-card {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  padding: 40px;
+  z-index: 2;
+}
+
+/* Textos */
+.admin-title {
+  color: #2b9348;
+  font-weight: 800;
+  text-align: center;
+}
+
+.admin-subtitle {
+  color: #555;
+  display: block;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Secciones */
+.admin-section {
+  margin-top: 40px;
+}
+
+.section-title {
+  text-align: center;
+  font-weight: 700;
+  color: #1b4332;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #1b4332, #2b9348, #55a630);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tarjetas de funciones */
+.feature-card {
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(85, 166, 48, 0.3);
+}
+
+.feature-icon {
+  font-size: 40px;
+  color: #2b9348;
+  margin-bottom: 15px;
+}
+
+.feature-title {
+  font-weight: 600;
+  color: #081c15;
+}
+
+.feature-text {
+  color: #444;
+}
+
+/* Botones inferiores */
+.admin-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Pestañas */
+.admin-tabs .ant-tabs-nav {
+  margin-bottom: 30px;
+}
+
+/* 🧠 Responsividad */
+@media (max-width: 1024px) {
+  .admin-card {
+    padding: 30px;
+  }
+
+  .feature-icon {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-panel-container {
+    padding: 20px;
+  }
+
+  .admin-title {
+    font-size: 24px;
+  }
+
+  .admin-card {
+    border-radius: 12px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-title {
+    font-size: 16px;
+  }
+
+  .feature-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-icon {
+    font-size: 32px;
+  }
+
+  .admin-title {
+    font-size: 22px;
+  }
+  .table-container {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .docs-list {
+    font-size: 12px;
+  }
+}
+.table-container {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.docs-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    padding: 0.5rem;
+  }
+  .docs-list {
+    font-size: 12px;
+  }
+  .ant-btn {
+    font-size: 12px;
+    padding: 0 6px;
+  }
+}
+
+
+}

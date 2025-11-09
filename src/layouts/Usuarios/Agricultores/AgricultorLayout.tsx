@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Layout, Button, Typography, theme } from 'antd';
 import {
   DashboardOutlined,
@@ -8,20 +8,22 @@ import {
   CalendarOutlined,
   MenuOutlined,
   CloseOutlined,
+  ShoppingCartOutlined,
+  FileDoneOutlined,
+  FileProtectOutlined,
 } from '@ant-design/icons';
 import { useAuth } from '../../../context/AuthContext';
 import './AgricultorLayout.css';
 
-const { Header, Content } = Layout;
+const { Header } = Layout;
 const { Title } = Typography;
 
 const AgricultorLayout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { logout } = useAuth();
-  const navigate = useNavigate();
 
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
 
   const handleLogout = () => {
@@ -30,35 +32,33 @@ const AgricultorLayout: React.FC = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
-  // Enlaces de navegación para el agricultor
+  // MENÚ COMPLETO
   const navLinks = [
     { text: 'Panel Principal', href: '/agricultor', icon: <DashboardOutlined /> },
-    { text: 'Mis Cultivos', href: '/agricultor/mis-cultivos', icon: <BlockOutlined /> },
-    { text: 'Cosechas', href: '/agricultor/cosechas', icon: <CalendarOutlined /> },
+    { text: 'Crear Oferta',    href: '/agricultor/crear-oferta', icon: <ShoppingCartOutlined /> },
+    { text: 'Mis Ofertas',     href: '/agricultor/ofertas',      icon: <FileDoneOutlined /> },
+    { text: 'Validación',      href: '/agricultor/validacion',   icon: <FileProtectOutlined /> },
   ];
 
   return (
     <div className="layout-puma agricultor-layout">
-      {/* HEADER IDÉNTICO AL LANDING */}
+
+      {/* HEADER */}
       <header className="header-aguila">
         <nav className="nav-condor">
           <Link to="/agricultor" className="logo-jaguar">
             Panel Agricultor
           </Link>
-          
+
+          {/* ESCRITORIO */}
           <div className="nav-escritorio-gacela">
             {navLinks.map((link) => (
-              <Link
-                key={link.text}
-                to={link.href}
-                className="nav-enlace-colibri"
-              >
+              <Link key={link.text} to={link.href} className="nav-enlace-colibri">
                 {link.icon}
                 <span>{link.text}</span>
               </Link>
             ))}
-            
-            {/* Botón Cerrar Sesión en desktop */}
+
             <Button
               type="primary"
               danger
@@ -70,7 +70,7 @@ const AgricultorLayout: React.FC = () => {
             </Button>
           </div>
 
-          {/* Botón menú móvil */}
+          {/* MÓVIL */}
           <div className="nav-boton-movil-contenedor">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -78,32 +78,23 @@ const AgricultorLayout: React.FC = () => {
               aria-controls="mobile-menu"
               aria-expanded={isMobileMenuOpen}
             >
-              <span className="sr-only">Abrir menú principal</span>
-              {isMobileMenuOpen ? <CloseOutlined className="h-6 w-6" /> : <MenuOutlined className="h-6 w-6" />}
+              <span className="sr-only">Menú</span>
+              {isMobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
             </button>
           </div>
         </nav>
       </header>
 
-      {/* MENÚ MÓVIL OVERLAY */}
+      {/* MENÚ MÓVIL */}
       {isMobileMenuOpen && (
-        <div 
-          className="menu-movil-overlay-buho" 
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-        >
+        <div className="menu-movil-overlay-buho" id="mobile-menu" role="dialog">
           <div className="menu-movil-contenido-loro">
             <div className="menu-movil-header-tucan">
               <Link to="/agricultor" className="logo-jaguar" onClick={closeMobileMenu}>
                 Panel Agricultor
               </Link>
-              <button
-                onClick={closeMobileMenu}
-                className="nav-boton-movil-halcon"
-              >
-                <span className="sr-only">Cerrar menú</span>
-                <CloseOutlined className="h-6 w-6" />
+              <button onClick={closeMobileMenu} className="nav-boton-movil-halcon">
+                <CloseOutlined />
               </button>
             </div>
 
@@ -119,16 +110,12 @@ const AgricultorLayout: React.FC = () => {
                   {link.text}
                 </Link>
               ))}
-              
-              {/* Botón Cerrar Sesión en móvil */}
+
               <Button
                 type="primary"
                 danger
                 icon={<LogoutOutlined />}
-                onClick={() => {
-                  closeMobileMenu();
-                  handleLogout();
-                }}
+                onClick={() => { closeMobileMenu(); handleLogout(); }}
                 className="menu-movil-enlace-quetzal logout-btn-mobile"
               >
                 Cerrar Sesión
@@ -138,14 +125,14 @@ const AgricultorLayout: React.FC = () => {
         </div>
       )}
 
-      {/* CONTENIDO PRINCIPAL */}
+      {/* CONTENIDO */}
       <main className="main-contenido-oso">
         <div className="main-contenido-interno-tapir">
           <Outlet />
         </div>
       </main>
 
-      {/* FOOTER (Opcional - puedes eliminarlo si no lo necesitas) */}
+      {/* FOOTER */}
       <footer className="footer-ballena">
         <div className="footer-contenido-delfin">
           <div className="footer-copyright-tortuga">
@@ -153,9 +140,11 @@ const AgricultorLayout: React.FC = () => {
           </div>
 
           <div className="footer-links-lobo">
-            <Link to="/agricultor" className="footer-link-koala">Panel Principal</Link>
-            <Link to="/agricultor/mis-cultivos" className="footer-link-koala">Mis Cultivos</Link>
-            <Link to="/agricultor/cosechas" className="footer-link-koala">Cosechas</Link>
+            {navLinks.map((link) => (
+              <Link key={link.text} to={link.href} className="footer-link-koala">
+                {link.text}
+              </Link>
+            ))}
           </div>
         </div>
       </footer>

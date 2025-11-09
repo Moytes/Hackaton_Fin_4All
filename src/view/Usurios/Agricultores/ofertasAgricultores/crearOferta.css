@@ -1,0 +1,483 @@
+.crear-oferta-container {
+  padding: 0;
+  max-width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.crear-oferta-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  border: 1px solid #e8e8e8;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.crear-oferta-header {
+  padding: 24px 24px 0 24px;
+  background: transparent;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+}
+
+.header-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(43, 147, 72, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.crear-oferta-icon {
+  font-size: 28px;
+  color: #2B9348;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.crear-oferta-title {
+  margin: 0 0 6px 0 !important;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.crear-oferta-subtitle {
+  color: #6c757d;
+  font-size: 15px;
+  line-height: 1.4;
+  display: block;
+}
+
+.section-divider {
+  margin: 20px 0;
+  border-color: #f0f0f0;
+}
+
+.crear-oferta-form {
+  padding: 0 24px 24px 24px;
+}
+
+.form-grid {
+  margin-bottom: 8px;
+}
+
+.form-item {
+  margin-bottom: 0;
+}
+
+.form-item .ant-form-item-label {
+  padding-bottom: 6px;
+}
+
+.form-item .ant-form-item-label > label {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
+  height: auto;
+}
+
+.user-info-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: 1px solid #e6f7ff;
+  background: #f8fdff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.user-info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.user-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.user-info-icon {
+  color: #2B9348;
+  font-size: 16px;
+  background: rgba(43, 147, 72, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-label {
+  font-size: 13px;
+  color: #6c757d;
+  line-height: 1.3;
+}
+
+.user-info-value {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.form-select,
+.form-input,
+.form-input-number {
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.form-select .ant-select-selector,
+.form-input,
+.form-input-number .ant-input-number-input {
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.form-input-number .ant-input-number-input {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.info-card {
+  margin: 24px 0 16px 0;
+  border-radius: 12px;
+  border: 1px solid #e6ffed;
+  background: #f6ffed;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.info-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 4px 0;
+}
+
+.info-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.info-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #389e0d;
+}
+
+.crear-oferta-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.submit-button {
+  flex: 2;
+  background: linear-gradient(135deg, #2B9348, #38b000);
+  border: none;
+  border-radius: 10px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(43, 147, 72, 0.25);
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(43, 147, 72, 0.35);
+  background: linear-gradient(135deg, #248232, #2B9348);
+}
+
+.cancel-button {
+  flex: 1;
+  border-radius: 10px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid #dee2e6;
+  background: transparent;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+  border-color: #495057;
+  color: #495057;
+  background: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+.crear-oferta-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 20px;
+}
+
+.loading-text {
+  color: #6c757d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.access-denied-card {
+  max-width: 500px;
+  margin: 40px 20px;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.access-denied-content {
+  padding: 48px 32px;
+}
+
+.error-icon {
+  font-size: 64px;
+  color: #dc3545;
+  margin-bottom: 24px;
+}
+
+.error-title {
+  color: #dc3545 !important;
+  margin-bottom: 16px !important;
+  font-size: 28px !important;
+}
+
+.error-description {
+  color: #6c757d;
+  font-size: 16px;
+  line-height: 1.5;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.error-button {
+  border-radius: 10px;
+  height: 44px;
+  padding: 0 40px;
+  font-weight: 600;
+  background: #dc3545;
+  border: none;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.25);
+}
+
+.error-button:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.35);
+}
+
+/* Estados de hover mejorados */
+.form-select .ant-select-selector:hover,
+.form-input:hover,
+.form-input-number:hover {
+  border-color: #2B9348;
+  box-shadow: 0 0 0 2px rgba(43, 147, 72, 0.1);
+}
+
+.form-select .ant-select-focused .ant-select-selector,
+.form-input:focus,
+.form-input-number:focus {
+  border-color: #2B9348;
+  box-shadow: 0 0 0 2px rgba(43, 147, 72, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .crear-oferta-container {
+    align-items: stretch;
+    padding: 0;
+    background: #ffffff;
+  }
+  
+  .crear-oferta-card {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    min-height: 100vh;
+  }
+  
+  .crear-oferta-header {
+    padding: 20px 20px 0 20px;
+  }
+  
+  .crear-oferta-form {
+    padding: 0 20px 20px 20px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .header-icon-container {
+    align-self: center;
+  }
+  
+  .user-info-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .user-info-item {
+    min-width: auto;
+    justify-content: flex-start;
+  }
+  
+  .crear-oferta-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .submit-button,
+  .cancel-button {
+    flex: none;
+    width: 100%;
+  }
+  
+  .access-denied-card {
+    margin: 20px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .crear-oferta-header {
+    padding: 16px 16px 0 16px;
+  }
+  
+  .crear-oferta-form {
+    padding: 0 16px 16px 16px;
+  }
+  
+  .crear-oferta-icon {
+    font-size: 24px;
+  }
+  
+  .crear-oferta-title {
+    font-size: 20px !important;
+  }
+  
+  .crear-oferta-subtitle {
+    font-size: 14px;
+  }
+  
+  .user-info-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .user-info-icon {
+    align-self: center;
+  }
+  
+  .user-info-text {
+    align-items: center;
+  }
+  
+  .info-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
+/* Animaciones suaves */
+.crear-oferta-card {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar personalizado */
+.crear-oferta-form::-webkit-scrollbar {
+  width: 6px;
+}
+
+.crear-oferta-form::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.crear-oferta-form::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.crear-oferta-form::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .crear-oferta-card,
+  .submit-button,
+  .cancel-button,
+  .form-select .ant-select-selector,
+  .form-input,
+  .form-input-number {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Estados de carga */
+.submit-button:disabled,
+.cancel-button:disabled {
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: none !important;
+}
