@@ -1,12 +1,12 @@
 /* Estilo general del contenedor principal */
+/* Contenedor principal centrado con fondo degradado */
 .register-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #007F5F 0%, #2B9348 100%);
-    padding: 2rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #007f5f 0%, #2b9348 50%, #55a630 100%);
+  padding: 20px;
 }
 
 .register-card {
