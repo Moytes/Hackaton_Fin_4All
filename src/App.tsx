@@ -1,80 +1,104 @@
 import React from 'react';
-// Importa los componentes de react-router-dom, incluyendo <Outlet />
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// --- Importación de Layouts ---
-// Estos componentes envolverán tus páginas
-import LandingLayout from './layouts/Landing/LandingLayout';
-import UsuariosLayout from './layouts/Usuarios/UsuariosLayout';
+// --- Contexto de Autenticación ---
+import { AuthProvider } from './context/AuthContext';
 
-// --- Importación de Vistas (Landing) ---
+// --- Componentes de Rutas ---
+// (Asegúrate que estas rutas de importación sean correctas)
+import { ProtectedRoute } from './components/view/landing/auth/login/ProtectedRoute';
+import { RoleBasedRoute } from './components/view/landing/auth/login/RoleBasedRoute';
+import { ROLES } from './types/user.types';
+
+// --- Layouts ---
+import LandingLayout from './layouts/Landing/LandingLayout';
+
+// --- LAYOUTS DE USUARIO ---
+import UsuariosLayout from './layouts/Usuarios/UsuariosLayout'; // Para Admin
+import AgricultorLayout from './layouts/Usuarios/Agricultores/AgricultorLayout';
+import AuditorLayout from './layouts/Usuarios/Auditores/AuditorLayout';
+import DistribuidorLayout from './layouts/Usuarios/Distribuidores/DistribuidorLayout';
+import LogisticaLayout from './layouts/Usuarios/Logistica/LogisticaLayout';
+
+
+// --- Vistas (Landing) ---
 import Inicio from './view/landing/Inicio/Inicio';
 import SobreNosotros from './view/landing/Sobrenosotros/SobreNosotros';
 import Contactos from './view/landing/Contactos/Contactos';
 
-// --- Importación de Vistas (Auth) ---
+// --- Vistas (Auth) ---
 import Login from './view/landing/auth/login/Login';
 import Register from './view/landing/auth/regiter/Register';
 
-// --- Importación de Vistas (Usuarios) ---
-// Corregí los nombres de 'Usurios' a 'Usuarios' y 'Adminitradores' a 'Administradores' en la importación
+// --- Vistas (Usuarios) ---
 import Administradores from './view/Usurios/Adminitradores/Administradores';
 import Agricultores from './view/Usurios/Agricultores/Agricultores';
 import Auditores from './view/Usurios/Auditores/Auditores';
 import Distribuidores from './view/Usurios/Distribuidores/Distribuidores';
 import Logistica from './view/Usurios/Logistica/Logistica';
 
-/**
- * Componente App: El corazón de la aplicación.
- * Define la estructura de enrutamiento principal usando Layouts.
- * Ya no contiene HTML de presentación, solo la lógica de rutas.
- */
 const App: React.FC = () => {
   return (
-    // BrowserRouter envuelve toda la aplicación para habilitar el enrutamiento
     <BrowserRouter>
-      {/* Routes define el área donde las rutas se renderizarán */}
-      <Routes>
-        
-        {/* --- RUTAS PÚBLICAS (LANDING) --- 
-         * Todas las rutas anidadas aquí usarán <LandingLayout />
-         * El <LandingLayout> contendrá el Header y Footer.
-         * El componente de la ruta (Ej: <Inicio />) se renderizará
-         * donde pongas <Outlet /> en tu LandingLayout.
-        */}
-        <Route path="/" element={<LandingLayout />}>
-          {/* La ruta 'index' (/) renderiza Inicio */}
-          <Route index element={<Inicio />} /> 
+      <AuthProvider>
+        <Routes>
+          {/* --- RUTAS PÚBLICAS (LANDING) --- */}
+          <Route path="/" element={<LandingLayout />}>
+            <Route index element={<Inicio />} />
+            <Route path="sobre-nosotros" element={<SobreNosotros />} />
+            <Route path="contactos" element={<Contactos />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+
+          {/* --- RUTAS PRIVADAS (PROTEGIDAS) ---
+           * <ProtectedRoute> envuelve a TODOS los roles.
+           * Si no estás logueado, te redirigirá a /login.
+           */}
+          <Route element={<ProtectedRoute />}>
+            
+            {/* --- Grupo del Administrador --- */}
+            <Route element={<RoleBasedRoute allowedRoles={[ROLES.ADMIN]} />}>
+              <Route path="/admin" element={<UsuariosLayout />}>
+                <Route index element={<Administradores />} />
+              </Route>
+            </Route>
+
+            {/* --- Grupo del Agricultor --- */}
+            <Route element={<RoleBasedRoute allowedRoles={[ROLES.ADMIN, ROLES.AGRICULTOR]} />}>
+              <Route path="/agricultor" element={<AgricultorLayout />}>
+                <Route index element={<Agricultores />} />
+              </Route>
+            </Route>
+
+            {/* --- Grupo del Auditor --- */}
+            <Route element={<RoleBasedRoute allowedRoles={[ROLES.ADMIN, ROLES.AUDITOR]} />}>
+              <Route path="/auditor" element={<AuditorLayout />}>
+                <Route index element={<Auditores />} />
+              </Route>
+            </Route>
+
+            {/* --- Grupo del Distribuidor --- */}
+            <Route element={<RoleBasedRoute allowedRoles={[ROLES.ADMIN, ROLES.DISTRIBUIDOR]} />}>
+              <Route path="/distribuidor" element={<DistribuidorLayout />}>
+                <Route index element={<Distribuidores />} />
+              </Route>
+            </Route>
+
+            {/* --- Grupo de Logística --- */}
+            <Route element={<RoleBasedRoute allowedRoles={[ROLES.ADMIN, ROLES.LOGISTICA]} />}>
+              <Route path="/logistica" element={<LogisticaLayout />}>
+                <Route index element={<Logistica />} />
+              </Route>
+            </Route>
+
+          </Route>
+
+          {/* --- RUTA POR DEFECTO --- */}
+          <Route path="*" element={<Navigate to="/" replace />} />
           
-          {/* Rutas hijas de Landing */}
-          <Route path="sobre-nosotros" element={<SobreNosotros />} />
-          <Route path="contactos" element={<Contactos />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-        </Route>
-
-        {/* --- RUTAS PRIVADAS (PANEL DE USUARIOS) ---
-         * Todas las rutas anidadas aquí usarán <UsuariosLayout />
-         * Este layout tendrá su propio menú (ej. una barra lateral).
-         * Todas las rutas aquí dentro estarán prefijadas por "/admin"
-        */}
-        <Route path="/admin" element={<UsuariosLayout />}>
-          {/* La ruta 'index' (/admin) renderiza Administradores */}
-          <Route index element={<Administradores />} />
-
-          {/* Rutas hijas de Usuarios (ej. /admin/agricultores) */}
-          <Route path="agricultores" element={<Agricultores />} />
-          <Route path="auditores" element={<Auditores />} />
-          <Route path="distribuidores" element={<Distribuidores />} />
-          <Route path="logistica" element={<Logistica />} />
-        </Route>
-
-        {/* --- RUTA POR DEFECTO ---
-         * Si no se encuentra ninguna ruta, redirige a la raíz (/).
-        */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

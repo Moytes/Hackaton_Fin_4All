@@ -1,13 +1,19 @@
 import React from 'react';
-// Importa Outlet para renderizar las rutas hijas
-import { Outlet } from 'react-router-dom';
+// CORRECCIÓN 1: Importamos 'Outlet' y 'NavLink' (en lugar de 'Link' o 'a')
+import { Outlet, NavLink } from 'react-router-dom';
 
 /**
  * Layout para el panel de administración (Usuarios).
- * Contiene un menú lateral (Sidebar) y un área de contenido.
- * NOTA: Este archivo debe llamarse 'index.tsx' dentro de 'src/layouts/Usuarios/'
  */
 const UsuariosLayout: React.FC = () => {
+
+  // Función para definir las clases del NavLink
+  const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
+    return isActive 
+      ? "block p-2 rounded bg-blue-600 text-white" // Estilo si está activo
+      : "block p-2 rounded hover:text-blue-300";   // Estilo si no está activo
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-200">
       
@@ -16,11 +22,34 @@ const UsuariosLayout: React.FC = () => {
         <h2 className="text-2xl font-bold mb-6">Panel Admin</h2>
         <nav>
           <ul>
-            {/* Aquí irían tus <Link> o <NavLink> de react-router-dom */}
-            <li className="mb-2"><a href="/admin" className="hover:text-blue-300">Dashboard</a></li>
-            <li className="mb-2"><a href="/admin/agricultores" className="hover:text-blue-300">Agricultores</a></li>
-            <li className="mb-2"><a href="/admin/auditores" className="hover:text-blue-300">Auditores</a></li>
-            <li className="mb-2"><a href="/admin/distribuidores" className="hover:text-blue-300">Distribuidores</a></li>
+            {/* CORRECCIÓN 2: Reemplazamos <a> por <NavLink> */}
+            {/* CORRECCIÓN 3: Corregimos las rutas (href -> to) */}
+            
+            <li className="mb-2">
+              <NavLink to="/admin" className={getNavLinkClass} end>
+                Dashboard (Admin)
+              </NavLink>
+            </li>
+            <li className="mb-2">
+              <NavLink to="/agricultor" className={getNavLinkClass}>
+                Agricultores
+              </NavLink>
+            </li>
+            <li className="mb-2">
+              <NavLink to="/auditor" className={getNavLinkClass}>
+                Auditores
+              </NavLink>
+            </li>
+            <li className="mb-2">
+              <NavLink to="/distribuidor" className={getNavLinkClass}>
+                Distribuidores
+              </NavLink>
+            </li>
+            <li className="mb-2">
+              <NavLink to="/logistica" className={getNavLinkClass}>
+                Logística
+              </NavLink>
+            </li>
             {/* ...etc. */}
           </ul>
         </nav>
@@ -35,7 +64,6 @@ const UsuariosLayout: React.FC = () => {
         </header>
 
         {/* <Outlet /> renderizará el componente de la ruta activa */}
-        {/* (Ej: <Administradores />, <Agricultores />, etc.) */}
         <main className="flex-grow p-6">
           <Outlet />
         </main>

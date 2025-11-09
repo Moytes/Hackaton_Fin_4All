@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Space, Row, Col } from 'antd';
 import './inicio.css';
 
+import cornImage from './img/st-corn-husks-in-the-field-1600.jpg';
+import carrotImage from './img/descarga.jpeg';
+import tomatoImage from './img/SUncherryPremium2.jpg';
+
 const { Title, Text } = Typography;
 
-/**
- * Vista: src/view/landing/Inicio
- */
+
 const Inicio: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className="landing-container">
-      {/* Animated Background Elements */}
       <div className="bg-animation">
         <div className="floating-element leaf-1">🌿</div>
         <div className="floating-element leaf-2">🍃</div>
@@ -25,7 +26,6 @@ const Inicio: React.FC = () => {
         <div className="circle circle-3"></div>
       </div>
 
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-grid">
           <div className="hero-content">
@@ -81,17 +81,17 @@ const Inicio: React.FC = () => {
 
           <div className="hero-visual">
             <div className="visual-card card-1">
-              <div className="card-emoji">🌽</div>
+              <img src={cornImage} alt="Maíz Orgánico" className="card-image" />
               <div className="card-text">Maíz Orgánico</div>
               <div className="card-price">$45/kg</div>
             </div>
             <div className="visual-card card-2">
-              <div className="card-emoji">🥕</div>
+              <img src={carrotImage} alt="Zanahorias Frescas" className="card-image" />
               <div className="card-text">Zanahorias Frescas</div>
               <div className="card-price">$30/kg</div>
             </div>
             <div className="visual-card card-3">
-              <div className="card-emoji">🍅</div>
+              <img src={tomatoImage} alt="Tomates Premium" className="card-image" />
               <div className="card-text">Tomates Premium</div>
               <div className="card-price">$55/kg</div>
             </div>
@@ -108,7 +108,6 @@ const Inicio: React.FC = () => {
         </div>
       </section>
 
-      {/* Interactive Features Section */}
       <section className="features-section">
         <div className="section-header">
           <span className="section-badge">Beneficios</span>
@@ -177,7 +176,6 @@ const Inicio: React.FC = () => {
         </Row>
       </section>
 
-      {/* How It Works Section */}
       <section className="process-section">
         <Title level={2} className="section-title-dark">
           Así de <span className="highlight-green">Fácil</span> es Comenzar
@@ -217,7 +215,6 @@ const Inicio: React.FC = () => {
         </div>
       </section>
 
-      {/* Final CTA Section */}
       <section className="cta-section">
         <div className="cta-content">
           <div className="cta-badge">🎉 Únete Hoy</div>

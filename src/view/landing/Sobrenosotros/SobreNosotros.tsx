@@ -44,19 +44,6 @@ const SobreNosotros: React.FC = () => {
       image: agricultoresImage,
       detail: (
         <>
-          <div style={{ marginBottom: 20 }}>
-            <Image
-              src={agricultoresImage}
-              alt="Agricultores trabajando en el campo"
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-              preview={false}
-            />
-          </div>
           <Paragraph>
             Los agricultores son el corazón de nuestra plataforma. Pueden ofrecer su mercancía de manera anónima y segura, evitando intermediarios que reducen sus ganancias.
           </Paragraph>
@@ -80,19 +67,6 @@ const SobreNosotros: React.FC = () => {
       image: distribuidoresImage,
       detail: (
         <>
-          <div style={{ marginBottom: 20 }}>
-            <Image
-              src={distribuidoresImage}
-              alt="Distribuidores gestionando productos agrícolas"
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-              preview={false}
-            />
-          </div>
           <Paragraph>
             Los distribuidores tienen acceso directo a productos agrícolas de calidad certificada. Pueden conectar con agricultores sin necesidad de intermediarios.
           </Paragraph>
@@ -116,19 +90,6 @@ const SobreNosotros: React.FC = () => {
       image: logisticaImage,
       detail: (
         <>
-          <div style={{ marginBottom: 20 }}>
-            <Image
-              src={logisticaImage}
-              alt="Servicios de logística y transporte"
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-              preview={false}
-            />
-          </div>
           <Paragraph>
             Las empresas de logística son fundamentales para conectar a agricultores con distribuidores. Ofrecen servicios de transporte confiables y seguros.
           </Paragraph>
@@ -150,19 +111,6 @@ const SobreNosotros: React.FC = () => {
       image: auditoresImage,
       detail: (
         <>
-          <div style={{ marginBottom: 20 }}>
-            <Image
-              src={auditoresImage}
-              alt="Auditores verificando calidad y cumplimiento"
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-              preview={false}
-            />
-          </div>
           <Paragraph>
             Los auditores garantizan la integridad de la plataforma, validando que todos los usuarios cumplan con los requisitos legales y de calidad establecidos.
           </Paragraph>
@@ -181,22 +129,9 @@ const SobreNosotros: React.FC = () => {
       title: 'Administradores',
       description: 'Gestión de la plataforma',
       color: '#007f5f',
-      image: agricultoresFelices1, // Usando una imagen existente para administradores
+      image: agricultoresFelices1,
       detail: (
         <>
-          <div style={{ marginBottom: 20 }}>
-            <Image
-              src={agricultoresFelices1}
-              alt="Administradores gestionando la plataforma"
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-              preview={false}
-            />
-          </div>
           <Paragraph>
             Los administradores supervisan el funcionamiento general de la plataforma, asegurando un ambiente seguro y eficiente para todos los usuarios.
           </Paragraph>
@@ -216,29 +151,33 @@ const SobreNosotros: React.FC = () => {
     {
       icon: <SafetyOutlined />,
       title: 'Protección contra extorsión',
-      content: 'Eliminamos intermediarios abusivos que cobran "piso" o comisiones excesivas. Los agricultores venden directamente su producto.'
+      content: 'Eliminamos intermediarios abusivos que cobran "piso" o comisiones excesivas. Los agricultores venden directamente su producto.',
+      image: agricultoresFelices1
     },
     {
       icon: <FileProtectOutlined />,
       title: 'Control de calidad certificado',
-      content: 'Todos los productos cumplen con BPA y normativas NTC 5400, garantizando estándares de calidad sin desperdicios. Incluso la merma se comercializa.'
+      content: 'Todos los productos cumplen con BPA y normativas NTC 5400, garantizando estándares de calidad sin desperdicios. Incluso la merma se comercializa.',
+      image: agricultoresFelices2
     },
     {
       icon: <DollarOutlined />,
       title: 'Opciones de financiamiento',
-      content: 'Para agricultores con recursos limitados, ofrecemos créditos y préstamos a través de empresas privadas confiables, evitando el coyotaje.'
+      content: 'Para agricultores con recursos limitados, ofrecemos créditos y préstamos a través de empresas privadas confiables, evitando el coyotaje.',
+      image: agricultoresFelices1
     },
     {
       icon: <TeamOutlined />,
       title: 'Comercio justo y transparente',
-      content: 'Una plataforma tipo LinkedIn agrícola donde todos los actores se conectan de manera segura, anónima cuando sea necesario, y transparente.'
+      content: 'Una plataforma tipo LinkedIn agrícola donde todos los actores se conectan de manera segura, anónima cuando sea necesario, y transparente.',
+      image: agricultoresFelices2
     }
   ];
 
   return (
     <div className="sobrenosotros-container">
       <Card className="main-card">
-        {/* Hero Section con imagen */}
+        {/* Hero Section */}
         <div className="hero-section">
           <div className="hero-image-container">
             <img
@@ -255,7 +194,7 @@ const SobreNosotros: React.FC = () => {
 
         <Divider />
 
-        {/* Misión con imagen */}
+        {/* Misión Section */}
         <section className="mission-section">
           <Row gutter={[32, 32]} align="middle">
             <Col xs={24} md={12}>
@@ -300,6 +239,9 @@ const SobreNosotros: React.FC = () => {
                   className="user-card"
                   onClick={() => showDrawer(user.title, user.detail)}
                 >
+                  <div className="user-image-container">
+                    <img src={user.image} alt={user.title} className="user-image" />
+                  </div>
                   <div className="user-icon" style={{ color: user.color }}>
                     {user.icon}
                   </div>
@@ -316,7 +258,7 @@ const SobreNosotros: React.FC = () => {
 
         <Divider />
 
-        {/* Características principales con imágenes */}
+        {/* Características principales */}
         <section className="features-section">
           <Title level={2}>¿Cómo lo logramos?</Title>
           <Row gutter={[24, 24]}>
@@ -325,7 +267,7 @@ const SobreNosotros: React.FC = () => {
                 <Card className="feature-card">
                   <div className="feature-image-container">
                     <img
-                      src={index % 2 === 0 ? agricultoresFelices1 : agricultoresFelices2}
+                      src={feature.image}
                       alt={feature.title}
                       className="feature-image"
                     />
@@ -341,7 +283,7 @@ const SobreNosotros: React.FC = () => {
 
         <Divider />
 
-        {/* Regulación y Calidad con banner */}
+        {/* Regulación y Calidad */}
         <section className="regulation-section">
           <div className="regulation-banner">
             <img
@@ -426,6 +368,19 @@ const SobreNosotros: React.FC = () => {
         width={window.innerWidth < 768 ? '100%' : 600}
         className="user-drawer"
       >
+        <div style={{ marginBottom: 20 }}>
+          <Image
+            src={drawerContent?.title === 'Agricultores' ? agricultoresImage : drawerContent?.title === 'Distribuidores' ? distribuidoresImage : drawerContent?.title === 'Logística' ? logisticaImage : drawerContent?.title === 'Auditores' ? auditoresImage : agricultoresFelices1}
+            alt={drawerContent?.title}
+            style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'cover',
+              borderRadius: '8px'
+            }}
+            preview={false}
+          />
+        </div>
         {drawerContent?.content}
       </Drawer>
     </div>

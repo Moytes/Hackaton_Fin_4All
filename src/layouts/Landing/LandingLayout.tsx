@@ -13,7 +13,8 @@ import {
   InstagramOutlined
 } from '@ant-design/icons';
 
-import './landing-layout-animales.css';
+// (Asegúrate que la ruta a tu CSS sea correcta)
+import './landing-layout-animales.css'; 
 
 const LandingLayout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,6 +25,8 @@ const LandingLayout: React.FC = () => {
     { text: 'Contacto', href: '/contactos', icon: <MailOutlined /> }, 
     { text: 'Login', href: '/login', icon: <LoginOutlined /> } 
   ];
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <div className="layout-puma">
@@ -67,11 +70,11 @@ const LandingLayout: React.FC = () => {
         >
           <div className="menu-movil-contenido-loro">
             <div className="menu-movil-header-tucan">
-              <Link to="/" className="logo-jaguar" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/" className="logo-jaguar" onClick={closeMobileMenu}>
                 TuLogo
               </Link>
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
                 className="nav-boton-movil-halcon"
               >
                 <span className="sr-only">Cerrar menú</span>
@@ -84,7 +87,7 @@ const LandingLayout: React.FC = () => {
                 <Link
                   key={link.text}
                   to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                   className="menu-movil-enlace-quetzal"
                 >
                   {link.icon}
@@ -98,6 +101,7 @@ const LandingLayout: React.FC = () => {
 
       <main className="main-contenido-oso">
         <div className="main-contenido-interno-tapir">
+          {/* Aquí es donde se renderiza tu página Login.tsx, Inicio, etc. */}
           <Outlet />
         </div>
       </main>

@@ -1,4 +1,4 @@
-/* SobreNosotros.css */
+/* SobreNosotros.css - Simplificado */
 
 /* Contenedor principal */
 .sobrenosotros-container {
@@ -27,34 +27,6 @@
   }
 }
 
-/* Efecto de partículas sutiles */
-.sobrenosotros-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-  animation: float 20s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-20px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(20px) rotate(240deg);
-  }
-}
-
 /* Card principal */
 .sobrenosotros-container .main-card {
   width: 100%;
@@ -72,29 +44,6 @@
   padding: 60px 50px;
 }
 
-/* Barra decorativa superior */
-.sobrenosotros-container .main-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #007f5f 0%, #2b9348 25%, #55a630 50%, #80b918 75%, #aacc00 100%);
-  animation: progressBar 3s ease-in-out infinite;
-}
-
-@keyframes progressBar {
-  0%, 100% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scaleX(1.02);
-    opacity: 0.8;
-  }
-}
-
 /* Hero Section */
 .hero-section {
   text-align: center;
@@ -110,7 +59,8 @@
 
 .hero-image {
   width: 100%;
-  height: 400px;
+  height: auto;
+  max-height: 400px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -120,39 +70,31 @@
   transform: scale(1.02);
 }
 
-/* Secciones */
+/* Secciones uniformes */
 .mission-section,
 .users-section,
 .features-section,
 .regulation-section,
 .cta-section {
   margin: 40px 0;
+  padding: 0;
 }
 
 .mission-section .ant-typography h2,
 .users-section .ant-typography h2,
-.features-section .ant-typography h2 {
+.features-section .ant-typography h2,
+.regulation-section .ant-typography h3,
+.cta-section .ant-typography h3 {
   color: #2b9348;
   font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.mission-text {
-  font-size: 17px;
-  line-height: 1.8;
-  color: #444;
-  margin-bottom: 16px;
-}
-
 /* Mission Image */
 .mission-image-container {
   width: 100%;
-  height: 100%;
-  min-height: 350px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
@@ -160,8 +102,8 @@
 
 .mission-image {
   width: 100%;
-  height: 100%;
-  min-height: 350px;
+  height: auto;
+  max-height: 350px;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -171,7 +113,14 @@
   transform: scale(1.05);
 }
 
-/* Dividers */
+.mission-text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+/* Dividers uniformes */
 .sobrenosotros-container .ant-divider {
   border-color: rgba(43, 147, 72, 0.15);
   margin: 40px 0;
@@ -193,19 +142,22 @@
   overflow: hidden;
 }
 
-.user-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(85, 166, 48, 0.1), transparent);
-  transition: left 0.5s ease;
+.user-image-container {
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  height: 150px; /* Altura uniforme para imágenes en tarjetas */
 }
 
-.user-card:hover::before {
-  left: 100%;
+.user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.user-card:hover .user-image {
+  transform: scale(1.05);
 }
 
 .user-card:hover {
@@ -256,21 +208,6 @@
   position: relative;
 }
 
-.feature-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #007f5f, #2b9348, #55a630);
-  transition: width 0.3s ease;
-}
-
-.feature-card:hover::after {
-  width: 100%;
-}
-
 .feature-card:hover {
   box-shadow: 0 8px 24px rgba(85, 166, 48, 0.2);
   transform: translateX(8px);
@@ -280,11 +217,12 @@
   margin-bottom: 20px;
   margin: -24px -24px 20px -24px;
   overflow: hidden;
+  height: 250px; /* Altura uniforme */
 }
 
 .feature-image {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -317,26 +255,17 @@
 }
 
 /* Regulation Cards */
-.regulation-section .ant-typography h3 {
-  color: #007f5f;
-  font-weight: 700;
-  font-size: 26px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .regulation-banner {
   margin-bottom: 32px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 200px; /* Altura uniforme */
 }
 
 .regulation-banner-image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -350,24 +279,6 @@
   padding: 20px;
   position: relative;
   overflow: hidden;
-}
-
-.regulation-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(transparent, rgba(85, 166, 48, 0.1), transparent 30%);
-  animation: rotate 4s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .regulation-card:hover {
@@ -419,27 +330,6 @@
   overflow: hidden;
 }
 
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(85, 166, 48, 0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-  animation: slide 20s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes slide {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(10px, 10px);
-  }
-}
-
 .cta-section .ant-typography h3 {
   color: #007f5f;
   font-weight: 700;
@@ -469,21 +359,6 @@
   overflow: hidden;
 }
 
-.cta-buttons .ant-btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.cta-buttons .ant-btn-primary:hover::before {
-  left: 100%;
-}
-
 .cta-buttons .ant-btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(43, 147, 72, 0.4);
@@ -501,21 +376,6 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-}
-
-.cta-buttons .ant-btn:not(.ant-btn-primary)::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(85, 166, 48, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.cta-buttons .ant-btn:not(.ant-btn-primary):hover::before {
-  left: 100%;
 }
 
 .cta-buttons .ant-btn:not(.ant-btn-primary):hover {
@@ -561,7 +421,7 @@
   line-height: 1.7;
 }
 
-/* Responsive Design */
+/* Responsive Design - Optimizado para uniformidad */
 
 /* Tablets grandes (hasta 1024px) */
 @media (max-width: 1024px) {
@@ -595,16 +455,28 @@
     font-size: 28px;
   }
 
+  .hero-image-container {
+    height: auto;
+  }
+
   .hero-image {
-    height: 350px;
+    max-height: 350px;
+  }
+
+  .mission-image-container {
+    height: auto;
   }
 
   .mission-image {
-    min-height: 300px;
+    max-height: 300px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 220px;
+  }
+
+  .user-image-container {
+    height: 140px;
   }
 }
 
@@ -623,7 +495,7 @@
   }
 
   .hero-image {
-    height: 300px;
+    max-height: 300px;
   }
 
   .hero-section .ant-typography h1 {
@@ -645,11 +517,15 @@
   }
 
   .mission-image {
-    min-height: 280px;
+    max-height: 280px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 200px;
+  }
+
+  .user-image-container {
+    height: 130px;
   }
 
   .user-icon {
@@ -664,12 +540,8 @@
     font-size: 24px;
   }
 
-  .regulation-banner-image {
+  .regulation-banner {
     height: 160px;
-  }
-
-  .regulation-icon-container {
-    height: 70px;
   }
 
   .cta-section {
@@ -695,7 +567,7 @@
   }
 
   .hero-image {
-    height: 250px;
+    max-height: 250px;
   }
 
   .hero-section .ant-typography h1 {
@@ -719,11 +591,15 @@
   }
 
   .mission-image {
-    min-height: 240px;
+    max-height: 240px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 180px;
+  }
+
+  .user-image-container {
+    height: 120px;
   }
 
   .user-icon {
@@ -734,12 +610,12 @@
     border-left-width: 3px;
   }
 
-  .regulation-banner-image {
+  .regulation-banner {
     height: 140px;
   }
 
   .regulation-icon-container {
-    height: 60px;
+    height: 70px;
   }
 
   .cta-section .ant-typography h3 {
@@ -773,7 +649,7 @@
   }
 
   .hero-image {
-    height: 220px;
+    max-height: 220px;
   }
 
   .hero-section .ant-typography h1 {
@@ -796,15 +672,19 @@
   }
 
   .mission-image {
-    min-height: 200px;
+    max-height: 200px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 160px;
   }
 
   .feature-image-container {
     margin: -20px -20px 16px -20px;
+  }
+
+  .user-image-container {
+    height: 110px;
   }
 
   .user-icon {
@@ -827,16 +707,12 @@
     font-size: 20px;
   }
 
-  .regulation-banner-image {
+  .regulation-banner {
     height: 120px;
   }
 
   .regulation-icon-container {
     height: 60px;
-  }
-
-  .regulation-card .ant-typography h5 {
-    font-size: 14px;
   }
 
   .cta-section {
@@ -861,7 +737,7 @@
   }
 
   .hero-image {
-    height: 200px;
+    max-height: 200px;
   }
 
   .hero-section .ant-typography h1 {
@@ -878,6 +754,10 @@
     font-size: 20px;
   }
 
+  .user-image-container {
+    height: 100px;
+  }
+
   .user-icon {
     font-size: 32px;
   }
@@ -886,7 +766,7 @@
     font-size: 26px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 140px;
   }
 
@@ -904,7 +784,7 @@
   }
 
   .hero-image {
-    height: 180px;
+    max-height: 180px;
   }
 
   .hero-section .ant-typography h1 {
@@ -921,7 +801,7 @@
     font-size: 12px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 120px;
   }
 
@@ -943,7 +823,7 @@
   }
 
   .hero-image {
-    height: 200px;
+    max-height: 200px;
   }
 
   .hero-section .ant-typography h1 {
@@ -974,6 +854,13 @@
   .cta-section {
     padding: 20px 16px;
   }
+
+  .feature-image-container,
+  .user-image-container,
+  .regulation-banner {
+    height: auto !important;
+    max-height: 150px;
+  }
 }
 
 /* Desktop grande (más de 1440px) */
@@ -991,7 +878,7 @@
   }
 
   .hero-image {
-    height: 450px;
+    max-height: 450px;
   }
 
   .hero-section .ant-typography h1 {
@@ -1013,11 +900,15 @@
   }
 
   .mission-image {
-    min-height: 400px;
+    max-height: 400px;
   }
 
-  .feature-image {
+  .feature-image-container {
     height: 280px;
+  }
+
+  .user-image-container {
+    height: 180px;
   }
 
   .user-icon {
