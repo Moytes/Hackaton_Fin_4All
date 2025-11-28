@@ -6,10 +6,7 @@ import { Button, Card, Typography, Space } from 'antd';
 
 const { Title, Text } = Typography;
 
-/**
- * Vista: src/view/Usuarios/Agricultores
- * Corregida para usar el AuthContext
- */
+
 const Agricultores: React.FC = () => {
   // 1. Obtenemos la función 'logout' de nuestro contexto
   const { logout } = useAuth();
